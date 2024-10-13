@@ -11,5 +11,5 @@ import:
       ref: main
 run:
   - command: |
-      python app.py
+      python main.py
     workdir: /src
