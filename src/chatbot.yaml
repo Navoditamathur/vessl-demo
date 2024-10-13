@@ -1,19 +1,4 @@
 name: Chatbot
-description: A barebone GPU-accelerated workload
-resources:
-  cluster: vessl-gcp-oregon
-  preset: gpu-l4-small
-image: quay.io/vessl-ai/torch:2.1.0-cuda12.2-r3
-import:
-  /code/:
-    git: 
-      url: https://github.com/Navoditamathur/vessl-demo
-      ref: main
-run:
-  - command: |
-      python app.py
-
-    name: chatbot-llamaindex-pinecone
 description: Chat with document with 🦙LlamaParse and 🌲Pinecone!
 tags:
   - RAG
@@ -45,6 +30,7 @@ ports:
   - name: gradio
     type: http
     port: 7860
+env:
 env:
   PINECONE_API_KEY: put-pinecone-api-key-here
   PINECONE_INDEX_NAME: vessl-rag-chatbot-index
