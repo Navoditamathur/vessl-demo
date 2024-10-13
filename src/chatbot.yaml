@@ -12,4 +12,4 @@ import:
 run:
   - command: |
       python main.py
-    workdir: /src
+    workdir: /code/src
