@@ -11,5 +11,44 @@ import:
       ref: main
 run:
   - command: |
-      python main.py
+      python app.py
+
+    name: chatbot-llamaindex-pinecone
+description: Chat with document with 🦙LlamaParse and 🌲Pinecone!
+tags:
+  - RAG
+  - LLM
+  - Chatbot
+resources:
+  cluster: vessl-gcp-oregon
+  preset: gpu-l4-small-spot
+image: quay.io/vessl-ai/cuda:12.4-r3
+import:
+  /code/:
+    git:
+      url: https://github.com/Navoditamathur/vessl-demo
+      ref: main
+run:
+  - command: |
+      pip install -r requirements.txt
     workdir: /code/src
+  - command: |
+      python app.py \
+        --pinecone-api-key $PINECONE_API_KEY \
+        --pinecone-index-name $PINECONE_INDEX_NAME \
+        --pinecone-region $PINECONE_REGION \
+        --llama-parse-api-key $LLAMA_PARSE_API_KEY \
+        --openai-api-base https://api.openai.com/v1 \
+        --openai-api-key $OPENAI_API_KEY
+    workdir: /code/src
+ports:
+  - name: gradio
+    type: http
+    port: 7860
+env:
+  PINECONE_API_KEY: put-pinecone-api-key-here
+  PINECONE_INDEX_NAME: vessl-rag-chatbot-index
+  PINECONE_REGION: us-east-1
+  LLAMA_PARSE_API_KEY: put-llamacloud-api-key-here
+  OPENAI_API_KEY: put-openai-api-key-here
+  GRADIO_SERVER_NAME: "0.0.0.0"
