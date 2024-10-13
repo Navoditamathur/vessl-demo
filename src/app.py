@@ -28,7 +28,7 @@ args.llama_parse_api_key = args.llama_parse_api_key or os.getenv("LLAMA_PARSE_AP
 args.pinecone_api_key = args.pinecone_api_key or os.getenv("PINECONE_API_KEY")
 args.openai_api_key = args.openai_api_key or os.getenv("OPENAI_API_KEY")
 
-def initialize_services():
+def initialize_services(llama_api_key, pinecone_api_key, pinecone_region, pinecone_index_name, openai_api_base, openai_api_key):
     global pc, openailike_client, parser
     if not args.pinecone_api_key or not args.llama_parse_api_key:
         raise ValueError("API keys are not provided.")
