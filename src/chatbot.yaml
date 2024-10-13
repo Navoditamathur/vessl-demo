@@ -11,7 +11,7 @@ image: quay.io/vessl-ai/cuda:12.4-r3
 import:
   /code/:
     git:
-      url: https://github.com/Navoditamathur/vessl-demo
+      url: https://github.com/Navoditamathur/vessl-demo.git
       ref: main
 run:
   - command: |
