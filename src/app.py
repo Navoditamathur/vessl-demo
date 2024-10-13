@@ -55,7 +55,7 @@ def initialize_services(llama_api_key, pinecone_api_key, pinecone_region, pineco
     parser = LlamaParse(api_key=args.llama_parse_api_key)
 
 def get_embedding(text):
-    return pc.inference.embed(model="multilingual-e5-large", inputs=[text], input_type="text").data[0]["values"]
+    return pc.inference.embed(model="multilingual-e5-large", inputs=[text], parameters={"input_type": "passage", "truncate": "END"}).data[0]["values"]
 
 def handle_chat(message):
     if not pc or not openailike_client or not parser:
